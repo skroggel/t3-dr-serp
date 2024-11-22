@@ -1,0 +1,61 @@
+plugin.tx_drserp {
+
+	view {
+		layoutRootPaths {
+			0 = EXT:dr_serp/Resources/Private/Layouts/
+			10 = {$plugin.tx_drserp.view.layoutRootPath}
+		}
+		templateRootPaths {
+			0 = EXT:dr_serp/Resources/Private/Templates/
+            10 = {$plugin.tx_drserp.view.templateRootPath}
+        }
+		partialRootPaths {
+			0 = EXT:dr_serp/Resources/Private/Partials/
+			10 = {$plugin.tx_drserp.view.partialRootPath}
+        }
+	}
+
+	persistence {
+		storagePid = {$plugin.tx_drserp.persistence.storagePid}
+	}
+
+	settings {
+
+	}
+}
+
+/**
+ * Set PageTitle-Providers
+ */
+plugin.tx_news {
+	settings {
+	    detail {
+
+			# override pageTitleProvider
+			pageTitle {
+				provider = Madj2k\DrSerp\PageTitle\NewsTitleProvider
+				properties = alternativeTitle,title
+			}
+        }
+    }
+}
+
+
+config {
+
+    # do not render website title in frontendController
+    showWebsiteTitle = 0
+    pageTitleProviders {
+
+        # override news provider
+        news {
+            provider = Madj2k\DrSerp\PageTitle\NewsTitleProvider
+            before = altPageTitle,record,seo
+        }
+        drSerp {
+            provider = Madj2k\DrSerp\PageTitle\WebsiteTitleProvider
+            after = news
+            before = record, seo, yoastRecord
+        }
+    }
+}

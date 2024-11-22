@@ -1,0 +1,40 @@
+{
+    "name": "madj2k/t3-dr-serp",
+    "type": "typo3-cms-extension",
+    "description": "Extension for a better SEO ranking",
+    "homepage": "https://www.steffenkroggel.de",
+    "license": ["GPL-2.0+"],
+    "keywords": ["TYPO3 CMS", "SEO", "Ranking"],
+    "support": {
+        "email": "developer@steffenkroggel.de"
+    },
+    "authors": [
+        {
+            "name": "Steffen Kroggel",
+            "email": "developer@steffenkroggel.de",
+            "homepage": "https://www.steffenkroggel.de",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=7.4",
+        "typo3/cms-core": "~10.4.0 || ~11.5.0 || ~12.4.0",
+        "typo3/cms-seo" :  "~10.4.0 || ~11.5.0 || ~12.4.0"
+	},
+	"suggest": {
+		"calien/persisted-sanitized-routing" : "^1.0.4"
+	},
+	"replace": {
+		"madj2k/t3-dr-seo": "*"
+	},
+    "autoload": {
+        "psr-4": {
+            "Madj2k\\DrSerp\\": "Classes/"
+        }
+    },
+    "extra": {
+        "typo3/cms": {
+            "extension-key": "dr_serp"
+        }
+    }
+}

@@ -1,0 +1,14 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  Madj2k\DrSerp\:
+    resource: '../Classes/*'
+
+  Madj2k\DrSerp\PageTitle\NewsTitleProvider:
+    public: true
+
+  Madj2k\DrSerp\PageTitle\WebsiteTitleProvider:
+    public: true
