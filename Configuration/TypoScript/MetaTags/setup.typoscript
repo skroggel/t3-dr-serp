@@ -1,0 +1,105 @@
+page {
+	meta {
+
+		# Inherit from root-page or override by current page
+        description.data = levelfield: 0 , description
+        description {
+            override.field = description
+        }
+
+        author.data = levelfield: 0, author
+        author {
+            override.field = author
+        }
+
+        keywords.data = levelfield: 0, keywords
+        keywords {
+            override.field = keywords
+        }
+
+        # OpenGraph Tags
+        # Get value from website config
+ 		og:site_name {
+            attribute = property
+            data = site:websiteTitle
+        }
+
+        og:title {
+            attribute = property
+            field = title
+            override.field = seo_title // og_title
+
+            stdWrap.noTrimWrap = | – ||
+            stdWrap.noTrimWrap.if.isFalse.field = seo_title
+
+            wrap.stdWrap.cObject  = TEXT
+            wrap.stdWrap.cObject {
+                data = site:websiteTitle
+                if.isFalse.field = seo_title
+            }
+        }
+
+        # Inherit from root-page or override by current page
+        og:description.data = levelfield: 0 , description
+        og:description {
+            attribute = property
+            override.field = description // og_description
+        }
+
+        # Do not set ogImage if news-extension already does this
+		og:image {
+			if.isFalse.data = GP:tx_news_pi1|action
+            attribute = property
+
+            stdWrap.cObject = COA
+            stdWrap.cObject {
+
+                # only if the og_image is not already set and rendered
+                if.isFalse.data = field:og_image
+
+                10  = TEXT
+                10 {
+
+                    # try to inherit og_image
+                    stdWrap.typolink {
+                        parameter.stdWrap {
+                            cObject = IMG_RESOURCE
+                            cObject {
+                                file {
+                                    import.data = levelfield: -1, og_image, slide
+                                    treatIdAsReference = 1
+                                    cropVariant = default
+                                    maxW = 1200
+                                    ext = webp
+                                }
+                            }
+                        }
+                        returnLast = url
+                        forceAbsoluteUrl = 1
+                    }
+
+                    # as alternative take media field
+                    stdWrap.ifEmpty.cObject = TEXT
+                    stdWrap.ifEmpty.cObject {
+                        stdWrap.typolink {
+                            parameter.stdWrap {
+                                cObject = IMG_RESOURCE
+                                cObject {
+                                    file {
+                                        import.data = levelfield: -1, media, slide
+                                        treatIdAsReference = 1
+                                        cropVariant = default
+                                        maxW = 1200
+                                        ext = webp
+                                    }
+                                }
+                            }
+                            returnLast = url
+                            forceAbsoluteUrl = 1
+                        }
+                    }
+                }
+            }
+		}
+    }
+}

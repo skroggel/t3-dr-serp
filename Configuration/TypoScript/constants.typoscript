@@ -1,0 +1,17 @@
+plugin.tx_drserp {
+	view {
+
+		# cat=plugin.tx_drserp/file; type=string; label=Path to template layouts (FE)
+		layoutRootPath = EXT:dr_serp/Resources/Private/Layouts/
+
+		# cat=plugin.tx_drserp/file; type=string; label=Path to template root (FE)
+		templateRootPath = EXT:dr_serp/Resources/Private/Templates/
+
+		# cat=plugin.tx_drserp/file; type=string; label=Path to template partials (FE)
+		partialRootPath = EXT:dr_serp/Resources/Private/Partials/
+	}
+
+	persistence {
+	    storagePid =
+	}
+}
