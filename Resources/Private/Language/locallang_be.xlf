@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.0" xmlns:t3="http://typo3.org/schemas/xliff">
+	<file source-language="en" datatype="plaintext">
+		<body>
+
+			<!-- extConf -->
+			<trans-unit id="extConf.pageTitleFields">
+				<source>Comma-separated list of fields for generating the page title. First field with data is used.</source>
+			</trans-unit>
+			<trans-unit id="extConf.pageTitleSeparator">
+				<source>Separator for page title.</source>
+			</trans-unit>
+			<trans-unit id="extConf.pageTitleIncludePageName">
+				<source>Add name of website to page title (from site-configurationn, needs pageTitleSeparator set)</source>
+			</trans-unit>
+			<trans-unit id="extConf.pageTitleCombineFields">
+				<source>If set the defined fields in pageTitleFields are combined in the order of their appearence instead of being used as fallbacks-chain (needs pageTitleSeparator set).</source>
+			</trans-unit>
+			<trans-unit id="extConf.pageTitleFieldsNews">
+				<source>Comma-separated list of fields for generating the page title. First field with data is used.</source>
+			</trans-unit>
+			<trans-unit id="extConf.pageTitleSeparatorNews">
+				<source>Separator for page title.</source>
+			</trans-unit>
+			<trans-unit id="extConf.pageTitleIncludePageNameNews">
+				<source>Add name of website to page title (from site-configurationn, needs pageTitleSeparatorNews set)</source>
+			</trans-unit>
+			<trans-unit id="extConf.pageTitleCombineFieldsNews">
+				<source>If set the defined fields in pageTitleFieldsNews are combined in the order of their appearence instead of being used as fallbacks-chain (needs pageTitleSeparatorNews set).</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

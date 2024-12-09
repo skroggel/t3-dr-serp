@@ -15,6 +15,7 @@ namespace Madj2k\DrSerp\PageTitle;
  * The TYPO3 project - inspiring people to share!
  */
 
+use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Exception\SiteNotFoundException;
 use TYPO3\CMS\Core\PageTitle\PageTitleProviderInterface;
 use TYPO3\CMS\Core\Site\SiteFinder;
@@ -31,10 +32,6 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
  */
 class WebsiteTitleProvider implements PageTitleProviderInterface
 {
-
-	protected const DEFAULT_PROPERTIES = 'seo_title,title';
-    protected const DEFAULT_GLUE = ' – ';
-
 
     /**
      * @var \TYPO3\CMS\Core\Site\SiteFinder
@@ -54,48 +51,46 @@ class WebsiteTitleProvider implements PageTitleProviderInterface
     /**
      * @param array $configuration
      * @return string
+     * @throws \TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationExtensionNotConfiguredException
+     * @throws \TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationPathDoesNotExistException
      * @throws \TYPO3\CMS\Core\Exception\SiteNotFoundException
      */
 	public function getTitle(array $configuration = []): string
 	{
+        $configReader = GeneralUtility::makeInstance(ExtensionConfiguration::class);
+        $extensionConfig = $configReader->get('dr_serp');
 
         // get relevant fields
-        $title = '';
-        $fields = GeneralUtility::trimExplode(',', $configuration['properties'] ?? self::DEFAULT_PROPERTIES, true);
-        // $separator = $configuration['separator'] ?? self::DEFAULT_GLUE;
+        $fields = GeneralUtility::trimExplode(',', ($extensionConfig['pageTitleFields'] ?? 'title'),true);
+        $separator = $extensionConfig['pageTitleSeparator'] ?? '';
+        $includePageName = (bool) $extensionConfig['pageTitleIncludePageName'] ?? false;
+        $combineFields = (bool) $extensionConfig['pageTitleCombineFields'] ?? false;
 
-        $usedField = '';
+        $title = [];
+        $frontendController = $this->getTypoScriptFrontendController();
         foreach ($fields as $field) {
-            $value = $this->getTypoScriptFrontendController()->page[$field];
-            if ($value) {
 
-                // store last used field and remove soft hyphens (if any)
-                $usedField = $field;
-                $title = str_replace('­', '', strip_tags($value));
-                break;
+            $value = $frontendController->page[$field] ?? '';
+            if (! empty($value)){
+                $title[] = trim(str_replace('­', '', strip_tags($value)));
+                if (!$separator || !$combineFields) {
+                    break;
+                }
             }
         }
 
-        $site = $this->siteFinder->getSiteByPageId($this->getTypoScriptFrontendController()->page['uid']);
-        $titleArray = [
-            $site->getAttribute('websiteTitle'),
-        ];
+        if ($separator && $includePageName) {
+
+            /** @var \TYPO3\CMS\Core\Site\Entity\Site $config */
+            $site = $this->siteFinder->getSiteByPageId((int)$this->getTypoScriptFrontendController()->page['uid']);
+            $title[] = $site->getConfiguration()['websiteTitle'];
+        }
 
         if ($title) {
-
-            // add title of page
-            $titleArray[] = $title;
-
-            // no website-title prefix if alternative field is used
-            if ($usedField == 'seo_title') {
-                $titleArray = [
-                    $title,
-                ];
-            }
+            return implode(' ' . $separator . ' ', $title);
         }
 
-        // merge
-		return implode(' – ', $titleArray);
+        return '';
 	}
 
 

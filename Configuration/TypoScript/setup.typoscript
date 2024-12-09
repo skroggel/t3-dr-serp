@@ -54,7 +54,7 @@ config {
         }
         drSerp {
             provider = Madj2k\DrSerp\PageTitle\WebsiteTitleProvider
-            after = news
+            after = news, catSearch
             before = record, seo, yoastRecord
         }
     }
