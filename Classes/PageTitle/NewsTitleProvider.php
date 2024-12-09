@@ -16,6 +16,7 @@ namespace Madj2k\DrSerp\PageTitle;
  */
 
 use GeorgRinger\News\Domain\Model\News;
+use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\PageTitle\AbstractPageTitleProvider;
 use TYPO3\CMS\Core\Site\SiteFinder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -51,51 +52,51 @@ class NewsTitleProvider extends AbstractPageTitleProvider
 	}
 
 
-	/**
-	 * @param \GeorgRinger\News\Domain\Model\News $news
-	 * @param array $configuration
-	 * @throws \TYPO3\CMS\Core\Exception\SiteNotFoundException
-	 */
+    /**
+     * @param \GeorgRinger\News\Domain\Model\News $news
+     * @param array $configuration
+     * @throws \TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationExtensionNotConfiguredException
+     * @throws \TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationPathDoesNotExistException
+     * @throws \TYPO3\CMS\Core\Exception\SiteNotFoundException
+     */
 	public function setTitleByNews(News $news, array $configuration = []): void
 	{
+        $configReader = GeneralUtility::makeInstance(ExtensionConfiguration::class);
+        $extensionConfig = $configReader->get('dr_serp');
+
         // get relevant fields
-		$title = '';
-		$fields = GeneralUtility::trimExplode(',', $configuration['properties'] ?? self::DEFAULT_PROPERTIES, true);
-        $separator = $configuration['separator'] ?? self::DEFAULT_GLUE;
+        $fields = GeneralUtility::trimExplode(',', ($extensionConfig['pageTitleFieldsNews'] ?? 'title'),true);
+        $separator = $extensionConfig['pageTitleSeparatorNews'] ?? '';
+        $includePageName = (bool) $extensionConfig['pageTitleIncludePageNameNews'] ?? false;
+        $combineFields = (bool) $extensionConfig['pageTitleCombineFieldsNews'] ?? false;
 
-		$usedField = '';
-		foreach ($fields as $field) {
-			$getter = 'get' . ucfirst($field);
-			$value = $news->$getter();
-			if ($value) {
+        $title = [];
+        foreach ($fields as $field) {
 
-                // store last used field and remove soft hyphens (if any)
-				$usedField = $field;
-				$title = str_replace('­', '', strip_tags($value));
-				break;
-			}
-		}
+            $getter = 'get' . GeneralUtility::underscoredToUpperCamelCase($field);
+            if (
+                (method_exists($news, $getter))
+                && ($value = $news->$getter())
+                && (is_string($value))
+            ){
+                $title[] = trim(str_replace('­', '', strip_tags($value)));
+                if (!$separator || !$combineFields) {
+                    break;
+                }
+            }
+        }
 
-        $site = $this->siteFinder->getSiteByPageId($this->getTypoScriptFrontendController()->page['uid']);
-        $titleArray = [
-            $site->getAttribute('websiteTitle'),
-        ];
+        if ($separator && $includePageName) {
 
-		if ($title) {
+            /** @var \TYPO3\CMS\Core\Site\Entity\Site $config */
+            $site = $this->siteFinder->getSiteByPageId((int)$this->getTypoScriptFrontendController()->page['uid']);
+            $title[] = $site->getConfiguration()['websiteTitle'];
+        }
 
-            // add title of page
-			$titleArray[] = $title;
 
-            // no website-title prefix if alternative field is used
-			if ($usedField == 'alternativeTitle') {
-				$titleArray = [
-					$title,
-				];
-			}
-		}
-
-        // merge
-        $this->title = implode($separator, $titleArray);
+        if ($title) {
+            $this->title = implode(' ' . $separator . ' ', $title);
+        }
 	}
 
 

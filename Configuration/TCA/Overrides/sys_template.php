@@ -6,13 +6,13 @@ call_user_func(
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile(
             $extKey,
             'Configuration/TypoScript',
-            'Dr.Seo'
+            'Dr.Serp'
         );
 
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile(
             $extKey,
             'Configuration/TypoScript/MetaTags',
-            'Dr.Seo - MetaTags and OpenGraph (optional)'
+            'Dr.Serp - MetaTags and OpenGraph (optional)'
         );
 
     },

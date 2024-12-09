@@ -1,0 +1,23 @@
+# cat=Page; type=string; label=LLL:EXT:dr_serp/Resources/Private/Language/locallang_be.xlf:extConf.pageTitleFields
+pageTitleFields = seo_title, title, subtitle
+
+# cat=Page; type=string; label=LLL:EXT:dr_serp/Resources/Private/Language/locallang_be.xlf:extConf.pageTitleSeparator
+pageTitleSeparator = –
+
+# cat=Page; type=boolean; label=LLL:EXT:dr_serp/Resources/Private/Language/locallang_be.xlf:extConf.pageTitleIncludePageName
+pageTitleIncludePageName = 1
+
+# cat=Page; type=boolean; label=LLL:EXT:dr_serp/Resources/Private/Language/locallang_be.xlf:extConf.pageTitleCombineFields
+pageTitleCombineFields = 0
+
+# cat=News; type=string; label=LLL:EXT:dr_serp/Resources/Private/Language/locallang_be.xlf:extConf.pageTitleFieldsNews
+pageTitleFieldsNews = alternative_title, title
+
+# cat=News; type=string; label=LLL:EXT:dr_serp/Resources/Private/Language/locallang_be.xlf:extConf.pageTitleSeparatorNews
+pageTitleSeparatorNews = –
+
+# cat=News; type=boolean; label=LLL:EXT:dr_serp/Resources/Private/Language/locallang_be.xlf:extConf.pageTitleIncludePageNameNews
+pageTitleIncludePageNameNews = 1
+
+# cat=News; type=boolean; label=LLL:EXT:dr_serp/Resources/Private/Language/locallang_be.xlf:extConf.pageTitleCombineFieldsNews
+pageTitleCombineFieldsNews = 0
