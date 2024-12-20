@@ -9,4 +9,4 @@ Features:
 ## Installation
 Just install the extension and include the typoscript.
 
-If you want to add the Typoscript for Meta-Tags and OpenGraph you can include add the additional Typoscript.
+If you want to add the Typoscript for Meta-Tags and OpenGraph you can include add the additional Typoscripts.
