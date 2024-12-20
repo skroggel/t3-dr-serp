@@ -1,21 +1,9 @@
 page {
 	meta {
 
-		# Inherit from root-page or override by current page
-        description.data = levelfield: 0, description
-        description {
-            override.field = description
-        }
-
-        author.data = levelfield: 0, author
-        author {
-            override.field = author
-        }
-
-        keywords.data = levelfield: 0, keywords
-        keywords {
-            override.field = keywords
-        }
+        description.field = description
+        author.field = author
+        keywords.field = keywords
 
         # OpenGraph Tags
         # Get value from website config
@@ -39,12 +27,7 @@ page {
             }
         }
 
-        # Inherit from root-page or override by current page
-        og:description.data = levelfield: 0 , description
-        og:description {
-            attribute = property
-            override.field = description // og_description
-        }
+        og:description.field = description // og_description
 
         # Do not set ogImage if news-extension already does this
 		og:image {
