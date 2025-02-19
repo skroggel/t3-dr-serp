@@ -23,13 +23,12 @@ $EM_CONF[$_EXTKEY] = [
 	'version' => '12.4.11',
 	'constraints' => [
 		'depends' => [
-            'typo3' => '10.4.0-12.4.99',
-            'seo' => '10.4.0-12.4.99',
+            'typo3' => '10.4.0-13.4.99',
+            'seo' => '10.4.0-13.4.99',
         ],
 		'conflicts' => [
 		],
 		'suggests' => [
-            'persisted_sanitized_routing' => '1.0.4',
         ],
 	],
 ];

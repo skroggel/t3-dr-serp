@@ -22,7 +22,6 @@
         "typo3/cms-seo" :  "~10.4.0 || ~11.5.0 || ~12.4.0"
 	},
 	"suggest": {
-		"calien/persisted-sanitized-routing" : "^1.0.4"
 	},
 	"replace": {
 		"madj2k/t3-dr-seo": "*"
