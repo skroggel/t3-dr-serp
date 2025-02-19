@@ -11,8 +11,8 @@
  ***************************************************************/
 
 $EM_CONF[$_EXTKEY] = [
-	'title' => 'Dr. SEO',
-	'description' => '',
+	'title' => 'Dr. Serp',
+	'description' => 'Extension for a better SEO ranking. Implements Meta-Tags and OpenGraph-Tags that can be added via TypoScript and comes with PageTitleProviders for EXT:news and for pages.',
 	'category' => 'plugin',
 	'author' => 'Steffen Kroggel',
 	'author_email' => 'developer@steffenkroggel.de',
@@ -20,16 +20,15 @@ $EM_CONF[$_EXTKEY] = [
 	'internal' => '',
 	'uploadfolder' => '0',
 	'clearCacheOnLoad' => 0,
-	'version' => '12.4.13',
+	'version' => '13.4.0',
 	'constraints' => [
 		'depends' => [
-            'typo3' => '10.4.0-12.4.99',
-            'seo' => '10.4.0-12.4.99',
+            'typo3' => '10.4.0-13.4.99',
+            'seo' => '10.4.0-13.4.99',
         ],
 		'conflicts' => [
 		],
 		'suggests' => [
-            'persisted_sanitized_routing' => '1.0.4',
         ],
 	],
 ];

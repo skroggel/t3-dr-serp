@@ -1,5 +1,5 @@
 # dr_serp
-This extension provides some advanced SEO-tools.
+Extension for a better SEO ranking. Implements Meta-Tags and OpenGraph-Tags that can be added via TypoScript and comes with PageTitleProviders for EXT:news and for pages.
 
 Features:
 * PageTitleProviders for EXT:news and for pages
