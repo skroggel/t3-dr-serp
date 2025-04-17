@@ -53,37 +53,34 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
  */
 class MetaTagViewHelper extends AbstractViewHelper
 {
-    use CompileWithRenderStatic;
 
     /**
      * Arguments initialization
      */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         $this->registerArgument('property', 'string', 'Property of meta tag', false, '', false);
         $this->registerArgument('name', 'string', 'Content of meta tag using the name attribute', false, '', false);
-        $this->registerArgument('content', 'string', 'Content of meta tag', true, null, false);
+        $this->registerArgument('content', 'string', 'Content of meta tag', true, '', false);
         $this->registerArgument('useCurrentDomain', 'boolean', 'Use current domain', false, false);
         $this->registerArgument('forceAbsoluteUrl', 'boolean', 'Force absolut domain', false, false);
         $this->registerArgument('replace', 'boolean', 'Replace potential existing tag', false, false);
     }
 
+
     /**
-     * @param array $arguments
-     * @param \Closure $renderChildrenClosure
-     * @param \TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface $renderingContext
      * @return void
      */
-    public static function renderStatic(array $arguments, \Closure $renderChildrenClosure, RenderingContextInterface $renderingContext)
+    public function render(): void
     {
         /** @var bool $useCurrentDomain */
-        $useCurrentDomain = $arguments['useCurrentDomain'];
+        $useCurrentDomain = $this->arguments['useCurrentDomain'];
 
         /** @var bool $forceAbsoluteUrl */
-        $forceAbsoluteUrl = $arguments['forceAbsoluteUrl'];
+        $forceAbsoluteUrl = $this->arguments['forceAbsoluteUrl'];
 
         /** @var string $content */
-        $content = (string)$arguments['content'];
+        $content = (string)$this->arguments['content'];
 
         // set current domain
         if ($useCurrentDomain) {
@@ -103,13 +100,14 @@ class MetaTagViewHelper extends AbstractViewHelper
 
         if ($content !== '') {
             $registry = GeneralUtility::makeInstance(MetaTagManagerRegistry::class);
-            if ($arguments['property']) {
-                $manager = $registry->getManagerForProperty($arguments['property']);
-                $manager->addProperty($arguments['property'], $content, [], $arguments['replace'], 'property');
-            } elseif ($arguments['name']) {
-                $manager = $registry->getManagerForProperty($arguments['name']);
-                $manager->addProperty($arguments['name'], $content, [], $arguments['replace'], 'name');
+            if ($this->arguments['property']) {
+                $manager = $registry->getManagerForProperty($this->arguments['property']);
+                $manager->addProperty($this->arguments['property'], $content, [], $this->arguments['replace'], 'property');
+            } elseif ($this->arguments['name']) {
+                $manager = $registry->getManagerForProperty($this->arguments['name']);
+                $manager->addProperty($this->arguments['name'], $content, [], $this->arguments['replace'], 'name');
             }
         }
+
     }
 }
