@@ -1,0 +1,15 @@
+/**
+ * Set PageTitle-Providers
+ */
+plugin.tx_news {
+	settings {
+	    detail {
+
+			# override pageTitleProvider
+			pageTitle {
+				provider = Madj2k\DrSerp\PageTitle\NewsTitleProvider
+				properties = alternativeTitle,title
+			}
+        }
+    }
+}

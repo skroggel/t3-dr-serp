@@ -1,4 +1,5 @@
 name: madj2k/dr-serp-meta-tags-no-inheritance
 label: 'Dr. SERP - MetaTags (without Inheritance, optional)'
+
 dependencies:
   - madj2k/dr-serp
