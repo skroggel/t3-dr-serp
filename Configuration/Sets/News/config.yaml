@@ -1,0 +1,5 @@
+name: madj2k/dr-serp-news
+label: 'Dr. SERP - News (optional)'
+
+dependencies:
+  - georgringer/news

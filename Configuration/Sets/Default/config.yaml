@@ -1,3 +1,5 @@
 name: madj2k/dr-serp
 label: 'Dr. SERP'
 
+dependencies:
+  - georgringer/news

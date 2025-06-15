@@ -25,7 +25,7 @@ plugin.tx_drserp {
 }
 
 /**
- * Set PageTitle-Providers
+ * Set PageTitle-Providers (fallback)
  */
 plugin.tx_news {
 	settings {
@@ -40,7 +40,6 @@ plugin.tx_news {
     }
 }
 
-
 config {
 
     # do not render website title in frontendController
@@ -50,12 +49,12 @@ config {
         # override news provider
         news {
             provider = Madj2k\DrSerp\PageTitle\NewsTitleProvider
-            before = altPageTitle,record,seo
+            before = altPageTitle,record,seo,drSerp,yoastRecord
         }
         drSerp {
             provider = Madj2k\DrSerp\PageTitle\WebsiteTitleProvider
-            after = news, catSearch
-            before = record, seo, yoastRecord
+            after = news,catSearch
+            before = record,seo,yoastRecord
         }
     }
 }
