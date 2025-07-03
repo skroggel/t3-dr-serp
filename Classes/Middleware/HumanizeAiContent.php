@@ -35,12 +35,6 @@ final class HumanizeAiContent implements MiddlewareInterface
 {
 
     /**
-     * @var \Psr\Http\Message\ServerRequestInterface|null
-     */
-    protected ?ServerRequestInterface $request = null;
-
-
-    /**
      * @var array
      */
     protected array $settings = [];
@@ -57,7 +51,6 @@ final class HumanizeAiContent implements MiddlewareInterface
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        $this->request = $request;
         $response = $handler->handle($request);
         if (!$response instanceof NullResponse) {
 
