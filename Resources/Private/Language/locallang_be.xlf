@@ -28,6 +28,15 @@
 			<trans-unit id="extConf.pageTitleCombineFieldsNews">
 				<source>If set the defined fields in pageTitleFieldsNews are combined in the order of their appearence instead of being used as fallbacks-chain (needs pageTitleSeparatorNews set).</source>
 			</trans-unit>
+			<trans-unit id="extConf.humanizeAiContentEnable">
+				<source>When set, typical unicode characters allowing for easy identification of AI-content are removed or replaced.</source>
+			</trans-unit>
+			<trans-unit id="extConf.humanizeAiContentSignsRemove">
+				<source>Comma-separated list of typical unicode characters that are used for easy identification of AI-content and are to be removed.</source>
+			</trans-unit>
+			<trans-unit id="extConf.humanizeAiContentSignsSpace">
+				<source>Comma-separated list of typical unicode characters that are used for easy identification of AI-content and are to be replaced by a whitespace.</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
