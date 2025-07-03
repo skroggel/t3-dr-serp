@@ -36,6 +36,18 @@
 				<source>If set the defined fields in pageTitleFieldsNews are combined in the order of their appearence instead of being used as fallbacks-chain (needs pageTitleSeparatorNews set).</source>
 				<target>Wenn gesetzt, werden die in pageTitleFieldsNews in der gegebenen Reihenfolge miteinander kombiniert anstatt als Fallbacks-Kette verwendet zu werden (benötigt gesetzten pageTitleSeparatorNews)</target>
 			</trans-unit>
+			<trans-unit id="extConf.humanizeAiContentEnable">
+				<source>>When set, typical unicode characters allowing for easy identification of AI-content are removed or replaced.</source>
+				<target>Wenn gesetzt, werden die typischen Unicode-Zeichen aus der Website entfernt oder ersetzt, die eine einfache Identifizierung von KI-Inhalten erlauben.</target>
+			</trans-unit>
+			<trans-unit id="extConf.humanizeAiContentSignsRemove">
+				<source>Comma-separated list of typical unicode characters that are used for easy identification of AI-content and are to be removed.</source>
+				<target>Kommaseparierte Liste von typischen Unicode-Zeichen, die eine einfache Identifizierung von KI-Inhalten erlauben und die entfernt werden sollen.</target>
+			</trans-unit>
+			<trans-unit id="extConf.humanizeAiContentSignsSpace">
+				<source>Comma-separated list of typical unicode characters that are used for easy identification of AI-content and are to be replaced by a whitespace.</source>
+				<target>Kommaseparierte Liste von typischen Unicode-Zeichen, die eine einfache Identifizierung von KI-Inhalten erlauben und die durch ein Leerzeichen ersetzt werden sollen.</target>
+			</trans-unit>
 
 		</body>
 	</file>
